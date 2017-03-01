@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="エージェント">
+      <UniqueIdentifier>{5c48688e-c7d5-4849-a7f5-29df0e070584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ボード">
+      <UniqueIdentifier>{a65af45d-5133-4dbc-a9ac-08850b6e18eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム">
+      <UniqueIdentifier>{f1b33d25-3123-43fc-8800-b7bcb0144d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="状態">
+      <UniqueIdentifier>{0d6b331e-a5b3-4d6d-ad74-a7e6438f6f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="エージェント\Q">
+      <UniqueIdentifier>{1e15e0e0-a969-425e-99a8-59b691bdb217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="エージェント\Impl">
+      <UniqueIdentifier>{7f093013-b79f-411c-9c01-b9817af1b5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Impl">
+      <UniqueIdentifier>{2549c883-3acc-4c77-ab6b-97fb82ee3bd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ハッシュ">
+      <UniqueIdentifier>{4cce977f-d575-4d59-8e8c-1054986a1676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ボード\Impl">
+      <UniqueIdentifier>{79e1c7ff-f67d-4890-b869-97b1c1e6d02f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAgent.h">
+      <Filter>エージェント</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardClass.h">
+      <Filter>ボード</Filter>
+    </ClInclude>
+    <ClInclude Include="OseloClass.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="OseloSystem.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="PutState.h">
+      <Filter>状態</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomAgent.h">
+      <Filter>エージェント</Filter>
+    </ClInclude>
+    <ClInclude Include="UserAgent.h">
+      <Filter>エージェント</Filter>
+    </ClInclude>
+    <ClInclude Include="QAgent.h">
+      <Filter>エージェント\Q</Filter>
+    </ClInclude>
+    <ClInclude Include="QLTLAgent.h">
+      <Filter>エージェント\Q</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentImpl.h">
+      <Filter>エージェント\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="OseloImpl.h">
+      <Filter>システム\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>ハッシュ</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardImpl.h">
+      <Filter>ボード\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentInit.cpp">
+      <Filter>エージェント</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentPut.cpp">
+      <Filter>エージェント</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardGet.cpp">
+      <Filter>ボード</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardPut.cpp">
+      <Filter>ボード</Filter>
+    </ClCompile>
+    <ClCompile Include="OseloCheck.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="OseloDisp.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="OseloETC.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="OseloGet.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="OseloPut.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="OseloUndo.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="PutState.cpp">
+      <Filter>状態</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardInit.cpp">
+      <Filter>ボード</Filter>
+    </ClCompile>
+    <ClCompile Include="QAgentFile.cpp">
+      <Filter>エージェント\Q</Filter>
+    </ClCompile>
+    <ClCompile Include="QAgentInit.cpp">
+      <Filter>エージェント\Q</Filter>
+    </ClCompile>
+    <ClCompile Include="QLTLFile.cpp">
+      <Filter>エージェント\Q</Filter>
+    </ClCompile>
+    <ClCompile Include="QLTLLearn.cpp">
+      <Filter>エージェント\Q</Filter>
+    </ClCompile>
+    <ClCompile Include="QLTLInit.cpp">
+      <Filter>エージェント\Q</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentImpl.cpp">
+      <Filter>エージェント\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="QAgentLearn.cpp">
+      <Filter>エージェント\Q</Filter>
+    </ClCompile>
+    <ClCompile Include="OseloImpl.cpp">
+      <Filter>システム\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Hash.cpp">
+      <Filter>ハッシュ</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardImpl.cpp">
+      <Filter>ボード\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardOperator.cpp">
+      <Filter>ボード</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardUndo.cpp">
+      <Filter>ボード</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
