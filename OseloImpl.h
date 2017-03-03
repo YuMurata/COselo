@@ -9,5 +9,5 @@ public:
 	int current_turn;
 	const int init_turn;
 
-	Impl(const BoardClass::CellNum &cell_num, const int &current_turn);
+	Impl(const BoardSize &cell_num, const int &current_turn);
 };

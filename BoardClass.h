@@ -2,14 +2,11 @@
 
 #include"PutState.h"
 
+using BoardSize = TCoordinate<int>;
+using Board = std::vector<std::vector<int>>;
+
 class BoardClass
 {
-public:
-using CellNum = TCoordinate<int>;
-
-using Board = std::vector<std::vector<int>>;
-using State = std::vector<std::pair<CellCoord, int>>;
-
 private:
 	class Impl;
 	std::unique_ptr<Impl> pimpl;
@@ -29,7 +26,7 @@ public:
 	BoardClass();
 
 	//cell_num‚Écell_num‚ğİ’è
-	BoardClass(const CellNum &board_size);
+	BoardClass(const BoardSize &board_size);
 
 	BoardClass(const BoardClass &board);
 
@@ -46,7 +43,7 @@ public:
 //Get
 
 	//”Õ–Ê‚Ì‘å‚«‚³‚ğæ“¾
-	CellNum GetBoardSize()const;
+	BoardSize GetBoardSize()const;
 
 	//À•Wcoord‚Ìó‘Ô‚ğæ“¾
 	int GetCellState(const CellCoord &coord)const;

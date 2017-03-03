@@ -6,7 +6,7 @@ BoardClass::BoardClass()
 	:BoardClass(8) {}
 
 //cell_num‚Écell_num‚ğİ’è
-BoardClass::BoardClass(const CellNum &board_size)
+BoardClass::BoardClass(const BoardSize &board_size)
 	:pimpl(new Impl(board_size)){}
 
 BoardClass::BoardClass(const BoardClass &board)

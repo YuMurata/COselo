@@ -1,8 +1,8 @@
 #include"OseloImpl.h"
 #include"OseloSystem.h"
 
-OseloClass::OseloClass(const BoardClass::CellNum &cell_num, const int &current_turn)
-	:pimpl(new Impl(cell_num, current_turn)) {}
+OseloClass::OseloClass(const BoardSize &board_size, const int &current_turn)
+	:pimpl(new Impl(board_size, current_turn)) {}
 
 OseloClass::~OseloClass() = default;
 

@@ -29,10 +29,10 @@ ostream& operator<<(ostream &stream, const BoardClass &board)
 	return stream;
 }
 
-BoardClass& BoardClass::operator=(const std::vector<std::vector<int>> &input)
+BoardClass& BoardClass::operator=(const Board &input)
 {
 	this->pimpl->board = input;
-	this->pimpl->board_size = CellNum(size(input[0]), size(input));
+	this->pimpl->board_size = BoardSize(size(input[0]), size(input));
 
 	return *this;
 }

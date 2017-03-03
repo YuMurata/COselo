@@ -3,7 +3,7 @@
 using namespace std;
 
 //”Õ–Ê‚Ì‘å‚«‚³‚ğæ“¾
-BoardClass::CellNum BoardClass::GetBoardSize()const
+BoardSize BoardClass::GetBoardSize()const
 {
 	return this->pimpl->board_size;
 }
@@ -36,7 +36,7 @@ int BoardClass::GetOften()const
 	return ret;
 }
 
-BoardClass::Board BoardClass::GetBoard()const
+Board BoardClass::GetBoard()const
 {
 	return this->pimpl->board;
 }
