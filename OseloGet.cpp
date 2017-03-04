@@ -52,5 +52,12 @@ vector<CellCoord> OseloSystem::GetPutable(const BoardClass& board, const int &co
 
 int OseloSystem::GetWin(const BoardClass &board)
 {
-	return board.GetOften();
+	int ret = BoardClass::Cell_Empty;
+	
+	if (OseloSystem::CheckFinish(board))
+	{
+		ret=board.GetOften();
+	}
+	
+	return ret;
 }

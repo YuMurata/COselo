@@ -5,7 +5,9 @@ using namespace std;
 
 pair<PutState,PutState>OseloClass::Init()
 {
-	return OseloSystem::Init(&this->pimpl->board);
+	auto ret=OseloSystem::Init(&this->pimpl->board);
+	this->pimpl->current_turn = this->pimpl->init_turn;
+	return ret;
 }
 
 PutState OseloClass::Put(const CellCoord &coord)
