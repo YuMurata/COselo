@@ -29,7 +29,10 @@ PutState OseloSystem::Put(BoardClass *board,const CellCoord &coord,const int &co
 	ret.flip = flip;
 	ret.put = coord;
 
-	board->PutPiecesAt(ret);
+	if (ret.IsPut())
+	{
+		board->PutPiecesAt(ret);
+	}
 
 	return ret;
 }
