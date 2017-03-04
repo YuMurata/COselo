@@ -29,6 +29,22 @@ ostream& operator<<(ostream &stream, const BoardClass &board)
 	return stream;
 }
 
+wostream& operator<<(wostream &stream, const BoardClass &board)
+{
+	ostream_iterator<int,wchar_t> out(stream, L",");
+
+	auto board_mat = board.GetBoard();
+
+	auto func = [&out](const vector<int> &line)
+	{
+		copy(begin(line), end(line), out);
+	};
+
+	for_each(begin(board_mat), end(board_mat), func);
+
+	return stream;
+}
+
 BoardClass& BoardClass::operator=(const Board &input)
 {
 	this->pimpl->board = input;

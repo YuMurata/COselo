@@ -62,6 +62,8 @@ public:
 
 	friend std::ostream& operator<<(std::ostream&, const BoardClass&);
 
+	friend std::wostream& operator<<(std::wostream&, const BoardClass&);
+
 	BoardClass& operator=(const std::vector<std::vector<int>> &input);
 
 	BoardClass& operator=(const BoardClass &board);
