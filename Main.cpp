@@ -71,16 +71,36 @@ int main()
 	//unique_ptr<RandomAgent> white(new RandomAgent(obj, BoardClass::Cell_WHITE));
 	unique_ptr<QAgent> white(new QAgent(obj, BoardClass::Cell_WHITE));
 
-	//black->LoadFile("black.ql");
-	//white->LoadFile("white.ql");
+	auto black_agent = dynamic_cast<QLTLAgent*>(black.get());
+	//auto qltl_agent = dynamic_cast<QLTLAgent*>(black.get());
+	auto white_agent = dynamic_cast<QAgent*>(white.get());
+	
+	if (black_agent != nullptr)
+	{
+		cout << "loading black.ql ..." << endl;
+		black_agent->LoadFile("black.ql");
+		black_agent = nullptr;
+		cout << "complete\n" << endl;
+	}
+
+	if (white_agent != nullptr)
+	{
+		cout << "loading white.ql ..." << endl;
+		white_agent->LoadFile("white.ql");
+		white_agent = nullptr;
+		cout << "complete\n" << endl;
+	}
 
 	unique_ptr<BaseAgent> agents[BoardClass::Cell_NUM];
 
 	agents[black->GetColor()] = move(black);
 	agents[white->GetColor()] = move(white);
 
-	const int learn_num = 100;
+	int learn_num = 100;
 	
+	cout << "num of learning >>" << flush;
+	cin >> learn_num;
+
 	unique_ptr<BaseVS> writer(new VSRandom);
 	
 	if (typeid(*agents[1]) != typeid(RandomAgent))
@@ -128,8 +148,26 @@ int main()
 		BaseAgent::win = BoardClass::Cell_Empty;
 	}
 
-	//dynamic_cast<QLTLAgent*>(agents[0].get())->WriteFile(("black.ql"));
-	//dynamic_cast<QAgent*>(agents[1].get())->WriteFile(("white.ql"));
+	cout << "complete" << endl;
+
+	black_agent = dynamic_cast<QLTLAgent*>(agents[0].get()); 
+	white_agent = dynamic_cast<QAgent*>(agents[1].get()); 
+
+	if (black_agent != nullptr)
+	{
+		cout << "saving black.ql ..." << endl;
+		black_agent->WriteFile("black.ql");
+		black_agent = nullptr;
+		cout << "complete\n" << endl;
+	}
+
+	if (white_agent != nullptr)
+	{
+		cout << "saving white.ql ..." << endl;
+		white_agent->WriteFile("white.ql");
+		white_agent = nullptr;
+		cout << "complete\n" << endl;
+	}
 
 	//cout << win_count[BoardClass::Cell_BLACK+1] << ":" << win_count[BoardClass::Cell_WHITE+1] << ":" << win_count[BoardClass::Cell_Empty + 1]<< endl;
 
@@ -144,7 +182,7 @@ int main()
 		file_name = "qltl_vs_q.xls";
 	}
 
-	writer->Write(file_name);
+//	writer->Write(file_name);
 
 #ifndef NDEBUG
 	_getch();

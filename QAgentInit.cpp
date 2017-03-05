@@ -3,6 +3,7 @@
 
 #include<algorithm>
 #include<StringPlus.h>
+#include<sstream>
 
 QAgent::QAgent(const shared_ptr<OseloClass> &obj, const int &color)
 	: BaseAgent(obj, color),q_pimpl(new Impl)

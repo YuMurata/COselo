@@ -2,7 +2,7 @@
 #include"OseloSystem.h"
 
 #include<StringPlus.h>
-
+#include<sstream>
 QLTLAgent::QLTLAgent(const shared_ptr<OseloClass> &obj, const int &color, const int &cell_num, const bool &learn_flag )
 	: BaseAgent(obj, color),qltl_pimpl(new Impl( cell_num,learn_flag))
 {
@@ -122,7 +122,7 @@ QLTLAgent::QLTLAgent(const shared_ptr<OseloClass> &obj, const int &color, const 
 
 		auto func = [](const pair<SA, double> &saq)
 		{
-			stringstream is;
+			std::stringstream is;
 			is << saq.first.first << saq.first.second << saq.second;
 
 			auto input = is.str();
