@@ -9,6 +9,14 @@
 
 using namespace std;
 
+enum VS_TYPE
+{
+	QL,
+	QLTL,
+	QLTL_QL,
+	NUM,
+};
+
 struct WinRate
 {
 	int game_count;
@@ -62,52 +70,93 @@ struct VSRL:public BaseVS
 	}
 };
 
-int main()
+void QLVSRandom(const shared_ptr<OseloClass> &obj,unique_ptr<BaseAgent> agents[])
 {
-	shared_ptr<OseloClass> obj(new OseloClass(8, BoardClass::Cell_BLACK));
+	agents[BoardClass::Cell_BLACK].reset(new QAgent(obj, BoardClass::Cell_BLACK));
+	agents[BoardClass::Cell_WHITE].reset(new RandomAgent(obj, BoardClass::Cell_WHITE));
+}
 
-	unique_ptr<QLTLAgent> black(new QLTLAgent(obj, BoardClass::Cell_BLACK, 64));
-	//unique_ptr<QAgent> black(new QAgent(obj, BoardClass::Cell_BLACK));
-	//unique_ptr<RandomAgent> white(new RandomAgent(obj, BoardClass::Cell_WHITE));
-	unique_ptr<QAgent> white(new QAgent(obj, BoardClass::Cell_WHITE));
+void QLTLVSRandom(const shared_ptr<OseloClass> &obj, unique_ptr<BaseAgent> agents[])
+{
+	agents[BoardClass::Cell_BLACK].reset(new QLTLAgent(obj, BoardClass::Cell_BLACK,64));
+	agents[BoardClass::Cell_WHITE].reset(new RandomAgent(obj, BoardClass::Cell_WHITE));
+}
 
-	auto black_agent = dynamic_cast<QLTLAgent*>(black.get());
-	//auto qltl_agent = dynamic_cast<QLTLAgent*>(black.get());
-	auto white_agent = dynamic_cast<QAgent*>(white.get());
-	
+void QLTLVSQL(const shared_ptr<OseloClass> &obj, unique_ptr<BaseAgent> agents[])
+{
+	agents[BoardClass::Cell_BLACK].reset(new QLTLAgent(obj, BoardClass::Cell_BLACK, 64));
+	agents[BoardClass::Cell_WHITE].reset(new QAgent(obj, BoardClass::Cell_WHITE));
+}
+
+void GetAgents(const shared_ptr<OseloClass> &obj, unique_ptr<BaseAgent> agents[], const int &vs_type)
+{
+	switch (vs_type)
+	{
+	case QL:
+		QLVSRandom(obj, agents);
+		break;
+	case QLTL:
+		QLTLVSRandom(obj, agents);
+		break;
+	case QLTL_QL:
+		QLTLVSQL(obj, agents);
+		break;
+	}
+}
+
+void Load(const unique_ptr<BaseAgent> agents[],const int &vs_type)
+{
+	BaseQ *black_agent = nullptr; 
+	BaseQ *white_agent = nullptr; 
+
+	switch (vs_type)
+	{
+	case QL:
+		black_agent= dynamic_cast<QAgent*>(agents[0].get());
+		break;
+	case QLTL:
+		black_agent = dynamic_cast<QLTLAgent*>(agents[0].get());
+		break;
+	case QLTL_QL:
+		black_agent = dynamic_cast<QLTLAgent*>(agents[0].get());
+		white_agent = dynamic_cast<QAgent*>(agents[1].get());
+		break;
+	}
+
 	if (black_agent != nullptr)
 	{
 		cout << "loading black.ql ..." << endl;
-		black_agent->LoadFile("black.ql");
-		black_agent = nullptr;
+		//	black_agent->LoadFile("black.ql");
 		cout << "complete\n" << endl;
 	}
 
 	if (white_agent != nullptr)
 	{
 		cout << "loading white.ql ..." << endl;
-		white_agent->LoadFile("white.ql");
-		white_agent = nullptr;
+		//	white_agent->LoadFile("white.ql");
 		cout << "complete\n" << endl;
 	}
+}
 
-	unique_ptr<BaseAgent> agents[BoardClass::Cell_NUM];
+unique_ptr<BaseVS> GetWriter(const int &vs_type)
+{
+	switch (vs_type)
+	{
+	case QL:
+		return unique_ptr<BaseVS>(new VSRandom);
+	case QLTL:
+		return unique_ptr<BaseVS>(new VSRandom);
+	case QLTL_QL:
+		return unique_ptr<BaseVS>(new VSRL);
+	}
+}
 
-	agents[black->GetColor()] = move(black);
-	agents[white->GetColor()] = move(white);
-
+void MainLoop(const shared_ptr<OseloClass> &obj,const unique_ptr<BaseAgent> agents[],const unique_ptr<BaseVS> &writer)
+{
 	int learn_num = 100;
-	
+
 	cout << "num of learning >>" << flush;
 	cin >> learn_num;
-
-	unique_ptr<BaseVS> writer(new VSRandom);
-	
-	if (typeid(*agents[1]) != typeid(RandomAgent))
-	{
-		writer.reset(new VSRL);
-	}
-
 
 	for (int i = 1; i <= learn_num; ++i)
 	{
@@ -147,17 +196,30 @@ int main()
 		}
 		BaseAgent::win = BoardClass::Cell_Empty;
 	}
+}
 
-	cout << "complete" << endl;
+void Save(const unique_ptr<BaseAgent> agents[],const int &vs_type)
+{
+	BaseQ *black_agent = nullptr;
+	BaseQ *white_agent = nullptr;
 
-	black_agent = dynamic_cast<QLTLAgent*>(agents[0].get()); 
-	white_agent = dynamic_cast<QAgent*>(agents[1].get()); 
-
+	switch (vs_type)
+	{
+	case QL:
+		black_agent = dynamic_cast<QAgent*>(agents[0].get());
+		break;
+	case QLTL:
+		black_agent = dynamic_cast<QLTLAgent*>(agents[0].get());
+		break;
+	case QLTL_QL:
+		black_agent = dynamic_cast<QLTLAgent*>(agents[0].get());
+		white_agent = dynamic_cast<QAgent*>(agents[1].get());
+		break;
+	}
 	if (black_agent != nullptr)
 	{
 		cout << "saving black.ql ..." << endl;
 		black_agent->WriteFile("black.ql");
-		black_agent = nullptr;
 		cout << "complete\n" << endl;
 	}
 
@@ -165,24 +227,51 @@ int main()
 	{
 		cout << "saving white.ql ..." << endl;
 		white_agent->WriteFile("white.ql");
-		white_agent = nullptr;
 		cout << "complete\n" << endl;
 	}
+}
 
-	//cout << win_count[BoardClass::Cell_BLACK+1] << ":" << win_count[BoardClass::Cell_WHITE+1] << ":" << win_count[BoardClass::Cell_Empty + 1]<< endl;
-
+void GraphSave(const unique_ptr<BaseVS> &writer, const int &vs_type)
+{
 	string file_name;
 
-	if (typeid(*writer) == typeid(VSRandom))
+	switch (vs_type)
 	{
-		file_name = typeid(*agents[0]).name() + string("_win.xls");
-	}
-	else
-	{
-		file_name = "qltl_vs_q.xls";
+	case QL:
+		file_name = "QL_win";
+		break;
+	case QLTL:
+		file_name = "QLTL_win";
+		break;
+	case QLTL_QL:
+		file_name = "QLTL_vs_QL";
+		break;
 	}
 
-//	writer->Write(file_name);
+	file_name += ".xls";
+
+	writer->Write(file_name);
+}
+
+
+int main()
+{
+	shared_ptr<OseloClass> obj(new OseloClass(8, BoardClass::Cell_BLACK));
+	unique_ptr<BaseAgent> agents[BoardClass::Cell_NUM];
+
+	int vs_type = QL;
+
+	GetAgents(obj, agents, vs_type);
+	
+	Load(agents,vs_type);
+
+	auto writer = GetWriter(vs_type);
+
+	MainLoop(obj, agents, writer);
+
+	Save(agents,vs_type);
+
+	GraphSave(writer, vs_type);
 
 #ifndef NDEBUG
 	_getch();

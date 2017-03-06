@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseAgent.h" />
+    <ClInclude Include="BaseQ.h" />
     <ClInclude Include="BoardClass.h" />
     <ClInclude Include="BoardImpl.h" />
     <ClInclude Include="Define.h" />

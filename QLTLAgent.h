@@ -1,8 +1,9 @@
 #pragma once
 #include"BaseAgent.h"
+#include"BaseQ.h"
 #include<string>
 
-class QLTLAgent :public BaseAgent 
+class QLTLAgent :public BaseAgent ,public BaseQ
 {
 private:
 	class Impl;

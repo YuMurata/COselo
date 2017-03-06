@@ -1,9 +1,10 @@
 #pragma once
 
 #include"BaseAgent.h"
+#include"BaseQ.h"
 #include<string>
 
-class QAgent :public BaseAgent
+class QAgent :public BaseAgent,public BaseQ
 {
 private:
 	class Impl;

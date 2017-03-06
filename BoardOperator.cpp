@@ -55,6 +55,6 @@ BoardClass& BoardClass::operator=(const Board &input)
 
 BoardClass& BoardClass::operator=(const BoardClass &board)
 {
-	this->pimpl.reset(new Impl(*board.pimpl));
+	this->pimpl.reset(new Impl(*board.pimpl.get()));
 	return *this;
 }
