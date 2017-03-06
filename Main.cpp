@@ -259,7 +259,7 @@ int main()
 	shared_ptr<OseloClass> obj(new OseloClass(8, BoardClass::Cell_BLACK));
 	unique_ptr<BaseAgent> agents[BoardClass::Cell_NUM];
 
-	int vs_type = QL;
+	int vs_type = QLTL;
 
 	GetAgents(obj, agents, vs_type);
 	
