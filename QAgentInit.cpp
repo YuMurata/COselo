@@ -26,7 +26,7 @@ QAgent::QAgent(const shared_ptr<OseloClass> &obj, const int &color)
 
 	auto func_r = [&](const S &s)
 	{
-		int ampl = 1;
+		int ampl = -1;
 		int reward = s.GetCellNum(this->base_pimpl->my_color);
 
 
@@ -36,15 +36,16 @@ QAgent::QAgent(const shared_ptr<OseloClass> &obj, const int &color)
 		}
 		else if (this->win == BoardClass::Cell_Empty)
 		{
-			ampl = 1;
+			ampl = -1;
 		}
 		else
 		{
 			ampl = -10;
 		}
 
-
-		return reward*ampl;
+		//auto ret=reward*ampl;
+		auto ret = ampl;
+		return ret;
 	};
 
 	T func_t = [&](const S &s, const A &a)

@@ -7,6 +7,8 @@
 #include"QAgent.h"
 #include"QLTLAgent.h"
 
+//#define AHO
+
 using namespace std;
 
 enum VS_TYPE
@@ -70,6 +72,27 @@ struct VSRL:public BaseVS
 	}
 };
 
+VS_TYPE GetVS()
+{
+#ifdef AHO
+#define STR(x) #x
+	int x;
+
+	do
+	{
+		cout << "vs:" << flush;
+		cin >> x;
+	} while (!(QL <= x&&x <= QLTL_QL));
+
+	cout << STR(x) << endl;
+
+	return (VS_TYPE)x;
+#else
+	return QLTL_QL;
+#endif
+
+}
+
 void QLVSRandom(const shared_ptr<OseloClass> &obj,unique_ptr<BaseAgent> agents[])
 {
 	agents[BoardClass::Cell_BLACK].reset(new QAgent(obj, BoardClass::Cell_BLACK));
@@ -106,6 +129,7 @@ void GetAgents(const shared_ptr<OseloClass> &obj, unique_ptr<BaseAgent> agents[]
 
 void Load(const unique_ptr<BaseAgent> agents[],const int &vs_type)
 {
+#ifndef AHO
 	BaseQ *black_agent = nullptr; 
 	BaseQ *white_agent = nullptr; 
 
@@ -126,16 +150,17 @@ void Load(const unique_ptr<BaseAgent> agents[],const int &vs_type)
 	if (black_agent != nullptr)
 	{
 		cout << "loading black.ql ..." << endl;
-		//	black_agent->LoadFile("black.ql");
+		black_agent->LoadFile("black.ql");
 		cout << "complete\n" << endl;
 	}
 
 	if (white_agent != nullptr)
 	{
 		cout << "loading white.ql ..." << endl;
-		//	white_agent->LoadFile("white.ql");
+		white_agent->LoadFile("white.ql");
 		cout << "complete\n" << endl;
 	}
+#endif
 }
 
 unique_ptr<BaseVS> GetWriter(const int &vs_type)
@@ -233,6 +258,7 @@ void Save(const unique_ptr<BaseAgent> agents[],const int &vs_type)
 
 void GraphSave(const unique_ptr<BaseVS> &writer, const int &vs_type)
 {
+#ifdef AHO
 	string file_name;
 
 	switch (vs_type)
@@ -251,6 +277,7 @@ void GraphSave(const unique_ptr<BaseVS> &writer, const int &vs_type)
 	file_name += ".xls";
 
 	writer->Write(file_name);
+#endif
 }
 
 
@@ -258,8 +285,8 @@ int main()
 {
 	shared_ptr<OseloClass> obj(new OseloClass(8, BoardClass::Cell_BLACK));
 	unique_ptr<BaseAgent> agents[BoardClass::Cell_NUM];
-
-	int vs_type = QLTL;
+	
+	auto vs_type = GetVS();
 
 	GetAgents(obj, agents, vs_type);
 	

@@ -30,7 +30,7 @@ QLTLAgent::QLTLAgent(const shared_ptr<OseloClass> &obj, const int &color, const 
 
 	auto func_r = [&](const BoardClass &s)
 	{
-		int ampl = 1;
+		int ampl = -1;
 		int reward = s.GetCellNum(this->base_pimpl->my_color);
 
 
@@ -40,15 +40,16 @@ QLTLAgent::QLTLAgent(const shared_ptr<OseloClass> &obj, const int &color, const 
 		}
 		else if (this->win == BoardClass::Cell_Empty)
 		{
-			ampl = 1;
+			ampl = -1;
 		}
 		else
 		{
 			ampl = -10;
 		}
 
-
-		return reward*ampl;
+		//auto ret=reward*ampl;
+		auto ret = ampl;
+		return ret;
 	};
 
 	T func_t = [&](const BoardClass &s, const CellCoord &a)
