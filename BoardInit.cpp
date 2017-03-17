@@ -10,7 +10,7 @@ BoardClass::BoardClass(const BoardSize &board_size)
 	:pimpl(new Impl(board_size)){}
 
 BoardClass::BoardClass(const BoardClass &board)
-	: pimpl(new Impl(*board.pimpl.get())) {}
+	: pimpl(new Impl(*board.pimpl)) {}
 
 BoardClass::~BoardClass() = default;
 

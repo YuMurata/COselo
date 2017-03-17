@@ -31,7 +31,7 @@ struct WinRate
 struct BaseVS
 {
 	vector<WinRate> data;
-	int win_count[BoardClass::Cell_NUM];
+	int win_count[BoardClass::Cell_NUM] = { 0 };
 	
 	void Add(const int &game_count)
 	{
@@ -216,7 +216,9 @@ void MainLoop(const shared_ptr<OseloClass> &obj,const unique_ptr<BaseAgent> agen
 
 		while ((state = obj->Undo()).IsPut())
 		{
+			obj->ChangeTurn();
 			agents[obj->GetCurrent()]->Review(state.put);
+			obj->ChangeTurn();
 			obj->DrawBoard();
 		}
 		BaseAgent::win = BoardClass::Cell_Empty;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include"BoardClass.h"
-
+#include<Coordinate.h>
 class BoardClass::Impl
 {
 public:

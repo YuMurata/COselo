@@ -52,9 +52,15 @@ QLTLAgent::QLTLAgent(const shared_ptr<OseloClass> &obj, const int &color, const 
 		return ret;
 	};
 
-	T func_t = [&](const BoardClass &s, const CellCoord &a)
+	T func_t = [&](const S &s, const A &a)
 	{
-		return OseloSystem::GetEstimate(s, a, this->base_pimpl->my_color);
+		auto board = OseloSystem::GetEstimate(s, a, this->base_pimpl->my_color).GetReverse();
+
+		auto best_a = this->qltl_pimpl->qltl_obj.BestAction(board);
+
+		auto ret = OseloSystem::GetEstimate(board, best_a, this->base_pimpl->my_color).GetReverse();
+
+		return ret;
 	};
 
 	As func_as = [&](const BoardClass &s)

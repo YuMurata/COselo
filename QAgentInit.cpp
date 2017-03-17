@@ -50,7 +50,12 @@ QAgent::QAgent(const shared_ptr<OseloClass> &obj, const int &color)
 
 	T func_t = [&](const S &s, const A &a)
 	{
-		auto ret = OseloSystem::GetEstimate(s, a, this->base_pimpl->my_color);
+		auto board = OseloSystem::GetEstimate(s, a, this->base_pimpl->my_color).GetReverse();
+
+		auto best_a=this->q_pimpl->ql_obj.BestAction(board);
+
+		auto ret = OseloSystem::GetEstimate(board,best_a,this->base_pimpl->my_color).GetReverse();
+		
 		return ret;
 	};
 

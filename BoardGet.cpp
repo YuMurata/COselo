@@ -40,3 +40,35 @@ Board BoardClass::GetBoard()const
 {
 	return this->pimpl->board;
 }
+
+BoardClass BoardClass::GetReverse()const
+{
+	BoardClass ret;
+	Board board(size(this->pimpl->board));
+
+	auto func1 = [](const int &cell)
+	{
+		if (cell == Cell_Empty)
+		{
+			return Cell_Empty;
+		}
+		else
+		{
+			auto ret = (cell + 1) % 2;
+			return (CellState)ret;
+		}
+	};
+
+	auto func2 = [&func1](const vector<int> &line)
+	{
+		vector<int> ret(size(line));
+		transform(begin(line), end(line),begin(ret), func1);
+		return line;
+	};
+
+	transform(begin(this->pimpl->board), end(this->pimpl->board), begin(board),func2);
+
+	ret = board;
+	
+	return ret;
+}

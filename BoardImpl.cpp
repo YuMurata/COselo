@@ -1,5 +1,5 @@
 #include"BoardImpl.h"
-
+#include"PutState.h"
 BoardClass::Impl::Impl(const BoardSize &board_size)
 	:board_size(board_size), cell_num(BoardClass::Cell_NUM) {}
 

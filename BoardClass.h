@@ -56,6 +56,8 @@ public:
 
 	Board GetBoard()const;
 
+	BoardClass GetReverse()const;
+
 	bool operator==(const BoardClass &obj)const;
 
 	bool operator<(const BoardClass &obj)const;

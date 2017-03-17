@@ -1,5 +1,5 @@
 #pragma once
-
+#include"PutState.h"
 #include"OseloClass.h"
 #include<memory>
 

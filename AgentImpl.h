@@ -12,6 +12,8 @@
 #include"../../MachineLearning/ReinforcementLearning/QLearning/QLTL/QLTLClass.h"
 #include<memory>
 
+#include"PutState.h"
+
 class BaseAgent::Impl
 {
 public:
